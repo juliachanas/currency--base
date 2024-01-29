@@ -80,12 +80,13 @@ describe('Component ResultBox', () => {
     for (const testObj of testCases) {
       const { from, to, amount, expectedOutput } = testObj;
 
-      // render component and store the result
+      // render component
       render(<ResultBox from={from} to={to} amount={amount} />);
 
       // find the output element
       const output = screen.getByTestId('output');
-      // assert the text content
+
+      // check the text content
       expect(output).toHaveTextContent(expectedOutput);
 
       // unmount component
@@ -106,6 +107,39 @@ describe('Component ResultBox', () => {
         to: 'PLN',
         amount: 345,
         expectedOutput: 'PLN 345.00 = PLN 345.00',
+      },
+    ];
+
+    for (const testObj of testCases) {
+      const { from, to, amount, expectedOutput } = testObj;
+
+      // render component and store the result
+      render(<ResultBox from={from} to={to} amount={amount} />);
+
+      // find the output element
+      const output = screen.getByTestId('output');
+
+      // check the text content
+      expect(output).toHaveTextContent(expectedOutput);
+
+      // unmount component
+      cleanup();
+    }
+  });
+
+  it('should render proper info when incorrect value', () => {
+    const testCases = [
+      {
+        from: 'USD',
+        to: 'PLN',
+        amount: -20,
+        expectedOutput: 'Wrong value...',
+      },
+      {
+        from: 'PLN',
+        to: 'USD',
+        amount: -345,
+        expectedOutput: 'Wrong value...',
       },
     ];
 
