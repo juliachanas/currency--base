@@ -1,10 +1,8 @@
 export const convertPLNToUSD = (PLN) => {
-  if (typeof PLN === 'undefined') {
+  if (typeof PLN === 'undefined' || typeof PLN === 'string') {
     return NaN;
-  } else if (typeof PLN !== 'number' && typeof PLN !== 'string') {
+  } else if (typeof PLN !== 'number') {
     return 'Error';
-  } else if (typeof PLN === 'string' || isNaN(PLN)) {
-    return NaN;
   }
 
   if (PLN < 0) {
